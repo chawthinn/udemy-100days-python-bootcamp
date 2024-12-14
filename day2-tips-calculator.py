@@ -7,7 +7,7 @@
 6. display the result
 
 """
-# Deinfe a function to calculate 
+# Define a function to calculate 
 def calculate_bill_per_person(bill, tips_percentage, pax_count):
     
     tips_amount = bill * ( tips_percentage / 100 )

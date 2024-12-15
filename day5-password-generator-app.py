@@ -2,7 +2,6 @@ import string
 import random
 import streamlit as st
 import time
-import pyperclip
 
 # Create session state variables
 if "last_clicked" not in st.session_state:

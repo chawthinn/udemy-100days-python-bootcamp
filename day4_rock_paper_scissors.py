@@ -44,43 +44,36 @@ def display_pick(choice):
 # Create function to generate results based on game rules
 def rock_paper_scissors_game(player_pick, computer_pick):
     if player_pick == 0: 
-        display_pick(player_pick)
-        print("Computer chose:")
+        player_choice = display_pick(player_pick)
+        computer_choice = display_pick(computer_pick)
         if computer_pick == 0: 
-            display_pick(computer_pick)
-            print("It's a draw.")
+            result = "It's a draw."
         elif computer_pick == 1:
-            display_pick(computer_pick)
-            print("You lose!")
+            result = "You lose!"
         else: 
-            display_pick(computer_pick)
-            print("You win!")
+            result = "You win!"
     elif player_pick == 1: 
-        display_pick(player_pick)
-        print("Computer chose:")
+        player_choice = display_pick(player_pick)
+        computer_choice = display_pick(computer_pick)
         if computer_pick == 0: 
-            display_pick(computer_pick)
-            print("You win!")
+            result = "You win!"
         elif computer_pick == 1:
-            display_pick(computer_pick)
-            print("It's a draw.")
+            result = "It's a draw."
         else: 
-            display_pick(computer_pick)
-            print("You lose!")
+            result = "You lose!"
     elif player_pick == 2: 
-        print("Computer chose:")
-        display_pick(player_pick)
+        player_choice = display_pick(player_pick)
+        computer_choice = display_pick(computer_pick)
         if computer_pick == 0: 
-            display_pick(computer_pick)
-            print("You lose!")
+            result = "You lose!"
         elif computer_pick == 1:
-            display_pick(computer_pick)
-            print("You win!")
+            result = "You win!"
         else: 
-            display_pick(computer_pick)
-            print("It's a draw.")
+            result = "It's a draw."
     else: 
-        print("Invalid choice. Choose 0, 1 or 2!")
+        result = "Invalid choice. Choose 0, 1 or 2!"
+    
+    return player_choice, computer_choice, result
 
 # Main function
 def main():
@@ -96,13 +89,18 @@ def main():
             print("What do you choose?")
             player_pick = int(input("Type 0 for Rock, 1 for Paper or 2 for Scissors. "))
 
-            # call rock_paper_scissors_game function
-            rock_paper_scissors_game(player_pick, computer_pick)
+            # Call the rock_paper_scissors_game function
+            player_choice, computer_choice, result = rock_paper_scissors_game(player_pick, computer_pick)
 
-            # let player choose to try again
+            # Display the choices and the result
+            print(f"Your choice: \n{player_choice}")
+            print(f"Computer's choice: \n{computer_choice}")
+            print(result)
+
+            # Let player choose to try again
             print("------------------")
-            try_again = input("Try again? (y/n) ")
-            if try_again == "n": # if user choose "n" to stop trying again
+            try_again = input("Try again? (y/n): ")
+            if try_again == "n":  # if user chooses "n" to stop trying again
                 break
     except ValueError: 
         print("Invalid input.")

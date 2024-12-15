@@ -9,28 +9,33 @@ st.title("Rock, Paper, Scissors Game")
 # Display game instructions
 st.markdown("### Choose Rock, Paper, or Scissors:")
 
-# Radio buttons to select Rock, Paper, or Scissors
-player_pick = st.radio("What do you choose?", ["Rock", "Paper", "Scissors"])
+# Streamlit UI setup
+st.title("Rock, Paper, Scissors Game")
 
-# Map the player input to numbers (Rock=0, Paper=1, Scissors=2)
-choices = ["Rock", "Paper", "Scissors"]
-player_choice = choices.index(player_pick)
+# Player's move input
+player_choice = st.radio("Choose your move:", ["Rock", "Paper", "Scissors"])
 
-# Generate a random computer choice
-computer_pick = random.randint(0, 2)
-computer_choice = choices[computer_pick]
+# Mapping player input to a number (0 = Rock, 1 = Paper, 2 = Scissors)
+if player_choice == "Rock":
+    player_choice_number = 0
+elif player_choice == "Paper":
+    player_choice_number = 1
+else:
+    player_choice_number = 2
 
-# Display the choices
-st.write(f"Your choice: {player_pick}")
-st.image(display_pick(player_choice), use_column_width=True)
+# Create a button to start the game
+if st.button("Play Game"):
+    # Randomly select the computer's choice (0 = Rock, 1 = Paper, 2 = Scissors)
+    computer_choice_number = random.randint(0, 2)
 
-st.write(f"Computer's choice: {computer_choice}")
-st.image(display_pick(computer_pick), use_column_width=True)
+    # Get the result of the game
+    player_choice_result, computer_choice_result, result = rock_paper_scissors_game(player_choice_number, computer_choice_number)
 
-# Display result
-result = rock_paper_scissors_game(player_choice, computer_pick)
-st.write(f"Result: {result}")
+    # Show the choices made
+    st.write("You chose:")
+    st.text(player_choice_result)  # ASCII art for player's choice
+    st.write("Computer chose:")
+    st.text(computer_choice_result)  # ASCII art for computer's choice
 
-# Option to try again
-if st.button("Play Again"):
-    st.experimental_rerun()
+    # Show the result
+    st.success(result)

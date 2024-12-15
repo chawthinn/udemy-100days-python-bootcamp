@@ -2,17 +2,16 @@ import string
 import random
 import streamlit as st
 
-# Function to load external files
+import streamlit as st
+
+# Function to load file content
 def load_file(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
-# Load CSS and HTML
+# Load CSS and HTML content
 footer_css = load_file("footer.css")
 footer_html = load_file("footer.html")
-
-# Inject CSS and HTML into the Streamlit app
-st.markdown(f"<style>{footer_css}</style>", unsafe_allow_html=True)
 
 # Password generation functions
 def generate_password(letters_count, symbols_count, numbers_count):
@@ -55,5 +54,11 @@ if st.button("🔄 Generate Password"):
     st.success("🎉 Password generated! Hover to copy to clipboard.")
     st.code(password)
 
-# Inject Footer HTML at the end
+# Add Spacer
+st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
+
+# Inject CSS into the app
+st.markdown(f"<style>{footer_css}</style>", unsafe_allow_html=True)
+
+# Add the footer HTML
 st.markdown(footer_html, unsafe_allow_html=True)

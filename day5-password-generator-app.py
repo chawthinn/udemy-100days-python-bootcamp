@@ -5,7 +5,7 @@ import time
 
 # Create session state variables
 if "last_clicked" not in st.session_state:
-    st.session_state.last_clicked = time.time()
+    st.session_state.last_clicked = time.time() 
 
 # Define rate limiting parameters
 rate_limit_interval = 3  # Time interval in seconds

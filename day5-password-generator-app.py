@@ -79,6 +79,12 @@ if st.button("🔄 Generate Password"):
         st.success("🎉 Password generated!")
         st.code(st.session_state.generated_password)
 
+# Display countdown in real-time
+if st.session_state.countdown > 0:
+    for i in range(st.session_state.countdown, 0, -1):
+        st.session_state.countdown = i
+        st.experimental_rerun()  # Rerun the app to update the countdown every second
+
 # Add Spacer
 st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)
 

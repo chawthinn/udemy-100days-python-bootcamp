@@ -1,19 +1,20 @@
 # app.py
 import streamlit as st
-from day4_rock_paper_scissors import display_pick, rock_paper_scissors_game
 import random
+from day4_rock_paper_scissors import display_pick, rock_paper_scissors_game
+from footer_utils import load_footer
 
 # Streamlit App
-st.title("Rock, Paper, Scissors Game")
+st.title("✊✋✌️Rock, Paper, Scissors Game")
+st.info("""
+ℹ️ Rules: 
+- Rock wins against scissors.
+- Scissors win against paper. 
+- Paper wins against rock.
+""")
 
-# Display game instructions
-st.markdown("### Choose Rock, Paper, or Scissors:")
-
-# Streamlit UI setup
-st.title("Rock, Paper, Scissors Game")
-
-# Player's move input
-player_choice = st.radio("Choose your move:", ["Rock", "Paper", "Scissors"])
+# Inputs
+player_choice = st.radio("Choose your pick:", ["Rock", "Paper", "Scissors"])
 
 # Mapping player input to a number (0 = Rock, 1 = Paper, 2 = Scissors)
 if player_choice == "Rock":
@@ -38,4 +39,17 @@ if st.button("Play Game"):
     st.text(computer_choice_result)  # ASCII art for computer's choice
 
     # Show the result
-    st.success(result)
+    if result == "You lose!":
+        st.error("🙁" + result)
+    elif result == "You win!":
+        st.success("🥳" + result)
+    else: 
+        st.info("🤷" + result)
+
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Display the footer with the dynamic day number
+day_number = 4
+footer_html = load_footer(day_number)
+st.markdown(footer_html, unsafe_allow_html=True)

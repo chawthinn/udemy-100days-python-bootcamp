@@ -11,35 +11,32 @@ import random
 # Create function to display rock, paper or scissors
 def display_pick(choice):
     rock = """
-    _______
----'   ____)
+___----_____
       (_____)
       (_____)
       (____)
 ---.__(___)
     """
     paper = """
-    _______
----'   ____)____
-          ______)
-          _______)
-         _______)
+___-----__________
+          ________)
+          _________)
+         ________)
 ---.__________)
     """
     scissors = """
-    _______
----'   ____)____
-          ______)
-       __________)
+___-----__________
+          ________)
+          _________)
       (____)
 ---.__(___)
     """
     if choice == 0:
-        print(rock)
+        return rock
     elif choice == 1: 
-        print(paper)
+        return paper
     elif choice == 2: 
-        print(scissors)
+        return scissors
 
 # Create function to generate results based on game rules
 def rock_paper_scissors_game(player_pick, computer_pick):

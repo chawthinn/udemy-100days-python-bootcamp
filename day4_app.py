@@ -5,7 +5,7 @@ from day4_rock_paper_scissors import display_pick, rock_paper_scissors_game
 from footer_utils import load_footer
 
 # Streamlit App
-st.title("✊✋✌️Rock, Paper, Scissors Game")
+st.title("Rock, Paper, Scissors Game")
 st.info("""
 ℹ️ Rules: 
 - Rock wins against scissors.
@@ -14,7 +14,7 @@ st.info("""
 """)
 
 # Inputs
-player_choice = st.radio("Choose your pick:", ["Rock", "Paper", "Scissors"])
+player_choice = st.radio("Choose your pick: ✊✋✌️", ["Rock", "Paper", "Scissors"])
 
 # Mapping player input to a number (0 = Rock, 1 = Paper, 2 = Scissors)
 if player_choice == "Rock":

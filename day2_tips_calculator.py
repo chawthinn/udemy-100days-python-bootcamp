@@ -16,7 +16,7 @@ def calculate_bill_per_person(bill, tips_percentage, pax_count):
 
     payable_per_pax = total_bill/ pax_count
 
-    return payable_per_pax
+    return payable_per_pax, tips_amount
 
 # Execute functions in Main Program
 if __name__ == "__main__":
@@ -39,8 +39,8 @@ if __name__ == "__main__":
             raise ValueError("Total count of people should be a positive number.")
     
         # Call function to calculate the tips
-        tips_per_pax = calculate_bill_per_person(bill, tips_percentage, pax_count)
-        print(f"Each person should pay: {tips_per_pax:.2f}")
+        payable_per_pax = calculate_bill_per_person(bill, tips_percentage, pax_count)
+        print(f"Each person should pay: {payable_per_pax:.2f}")
 
     except ValueError as e:
         print(f"Input Error: {e}")

@@ -56,9 +56,11 @@ if st.button("🔄 Generate Password"):
     # Check the time of the last button click
     current_time = time.time()
 
-    if current_time - st.session_state.last_clicked < rate_limit_interval:
-        st.warning("Please wait a few seconds before trying again.")
+    # Check if the rate limit interval has passed and if it's not the first click
+    if not st.session_state.first_click and current_time - st.session_state.last_clicked < rate_limit_interval:
+        st.warning(f"Please wait {rate_limit_interval} seconds before trying again.")
     else:
+        # Update the session state time
         st.session_state.last_clicked = current_time
         # Generate password
         password = generate_password(letters_count, symbols_count, numbers_count)

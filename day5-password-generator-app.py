@@ -33,9 +33,12 @@ letters_count = st.number_input("How many letters?", min_value=0, value=4)
 symbols_count = st.number_input("How many symbols?", min_value=0, value=2)
 numbers_count = st.number_input("How many numbers?", min_value=0, value=3)
 
-# Generate password button
+# Generate button
 if st.button("Generate Password"):
+    # Generate password
     password = generate_password_v4(letters_count, symbols_count, numbers_count)
-    st.success(f"Passowrd generated!")
+
+    # Display the password with copy-to-clipboard
+    st.write("Your generated password:")
     st.text_input("Copy your password", value=password, key="password_input", disabled=True)
     st.code(password)

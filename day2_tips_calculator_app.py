@@ -15,9 +15,21 @@ pax_count = st.number_input("How many people to split the bill?", min_value=2)
 # Calculate button
 if st.button("Calculate"):
     if bill > 0 and pax_count > 0:
-        payable_per_pax, tips_amount = calculate_bill_per_person(bill, tips_percentage, pax_count)
-        st.write(f"💰 Total tip amount: ${tips_amount:.2f}")
-        st.success(f"💸 Each person should pay: ${payable_per_pax:.2f}")
+        final_bill, tips_amount, payable_per_pax = calculate_bill_per_person(bill, tips_percentage, pax_count)
+
+        st.success(f"💸 Each person should pay: **${payable_per_pax:.2f}**")
+
+        # Display breakdown using st.write
+        st.info(
+            f"""
+             ℹ️ Total Bill Breakdown"
+            | **Description**         | **Amount**        |
+            |------------------------ |------------------ |
+            | Original Bill           | ${bill:.2f}       |
+            | Tip ({tips_percentage}%)| ${tips_amount:.2f}|
+            | Final Bill              | ${final_bill:.2f} |
+            """
+        )
 
     else:
         st.error("Please make sure the bill amount and number of people are positive.")

@@ -12,11 +12,11 @@ def calculate_bill_per_person(bill, tips_percentage, pax_count):
     
     tips_amount = bill * ( tips_percentage / 100 )
 
-    total_bill = bill + tips_amount
+    final_bill = bill + tips_amount
 
-    payable_per_pax = total_bill/ pax_count
+    payable_per_pax = final_bill/ pax_count
 
-    return payable_per_pax, tips_amount
+    return final_bill, tips_amount, payable_per_pax
 
 # Execute functions in Main Program
 if __name__ == "__main__":

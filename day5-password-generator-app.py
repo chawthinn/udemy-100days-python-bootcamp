@@ -10,9 +10,11 @@ if "generated_password" not in st.session_state:
     st.session_state.generated_password = ""
 if "first_click" not in st.session_state:
     st.session_state.first_click = True  # Track if it's the first click
+if "countdown" not in st.session_state:
+    st.session_state.countdown = 0  # Store the countdown timer
 
 # Define rate limiting parameters
-rate_limit_interval = 10  # Time interval in seconds
+rate_limit_interval = 6  # Time interval in seconds
 
 # Function to load file content
 def load_file(file_path):
@@ -62,7 +64,9 @@ if st.button("🔄 Generate Password"):
 
     # Check if the rate limit interval has passed and if it's not the first click
     if not st.session_state.first_click and current_time - st.session_state.last_clicked < rate_limit_interval:
-        st.warning(f"Please wait {rate_limit_interval} seconds before trying again.")
+        time_remaining = rate_limit_interval - (current_time - st.session_state.last_clicked)
+        st.session_state.countdown = int(time_remaining)  # Update countdown
+        st.warning(f"Please wait {st.session_state.countdown} seconds before trying again.")
     else:
         # Update the session state time and generate the password
         st.session_state.last_clicked = current_time

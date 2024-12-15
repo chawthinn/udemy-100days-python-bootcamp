@@ -70,7 +70,7 @@ if st.button("🔄 Generate Password"):
 
         # Countdown loop for live updates
         for i in range(st.session_state.countdown, 0, -1):
-            countdown_placeholder.warning(f"Please wait {i} seconds before trying again.")
+            countdown_placeholder.warning(f"⚠️ Please wait {i} seconds before trying again.")
             time.sleep(1)  # Delay of 1 second
 
         countdown_placeholder.success("👍You can now generate a new password!")

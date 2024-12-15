@@ -10,7 +10,9 @@ if "generated_password" not in st.session_state:
     st.session_state.generated_password = ""
 if "first_click" not in st.session_state:
     st.session_state.first_click = True  # Track if it's the first click
-
+if "countdown" not in st.session_state:
+    st.session_state.countdown = 0
+    
 # Define rate limiting parameters
 rate_limit_interval = 10  # Time interval in seconds
 

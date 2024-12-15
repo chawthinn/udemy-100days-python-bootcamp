@@ -35,5 +35,6 @@ if st.button("Calculate"):
         st.error("Please make sure the bill amount and number of people are positive.")
 
 # Display the footer with the dynamic day number
-footer_html = load_footer(2)
+day_number = 2
+footer_html = load_footer(day_number)
 st.markdown(footer_html, unsafe_allow_html=True)

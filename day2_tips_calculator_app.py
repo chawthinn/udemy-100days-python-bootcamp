@@ -16,7 +16,7 @@ pax_count = st.number_input("How many people to split the bill?", min_value=2)
 if st.button("Calculate"):
     if bill > 0 and pax_count > 0:
         tips_per_pax = calculate_bill_per_person(bill, tips_percentage, pax_count)
-        st.success(f"Each person should pay: ${tips_per_pax:.2f}")
+        st.success(f"💸 Each person should pay: ${tips_per_pax:.2f}")
     else:
         st.error("Please make sure the bill amount and number of people are positive.")
 

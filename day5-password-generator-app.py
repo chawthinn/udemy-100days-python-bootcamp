@@ -2,6 +2,7 @@ import string
 import random
 import streamlit as st
 import time
+import pyperclip
 
 # Create session state variables
 if "last_clicked" not in st.session_state:
@@ -64,7 +65,7 @@ if st.button("🔄 Generate Password"):
         password = generate_password(letters_count, symbols_count, numbers_count)
 
         # Display the password with copy-to-clipboard
-        st.success("🎉 Password generated! Hover to copy to clipboard.")
+        st.success("🎉 Password generated!")
         st.code(password)
 
 # Add Spacer

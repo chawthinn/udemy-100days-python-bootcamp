@@ -12,7 +12,7 @@ if "first_click" not in st.session_state:
     st.session_state.first_click = True  # Track if it's the first click
 
 # Define rate limiting parameters
-rate_limit_interval = 6  # Time interval in seconds
+rate_limit_interval = 10  # Time interval in seconds
 
 # Function to load file content
 def load_file(file_path):

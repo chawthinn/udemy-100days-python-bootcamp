@@ -26,6 +26,7 @@ def generate_password_v4(letters_count, symbols_count, numbers_count):
 
 # Streamlit App
 st.title("PyPassword Generator")
+st.text("Here you can generate password with your choice of random letters, symbols and numbers.")
 
 # Inputs
 letters_count = st.number_input("How many letters?", min_value=0, value=4)
@@ -35,4 +36,6 @@ numbers_count = st.number_input("How many numbers?", min_value=0, value=3)
 # Generate password button
 if st.button("Generate Password"):
     password = generate_password_v4(letters_count, symbols_count, numbers_count)
-    st.success(f"Generated Password: {password}")
+    st.success(f"Passowrd generated!")
+    st.text_input("Copy your password", value=password, key="password_input", disabled=True)
+    st.code(password)

@@ -12,7 +12,7 @@ if "first_click" not in st.session_state:
     st.session_state.first_click = True  # Track if it's the first click
 
 # Define rate limiting parameters
-rate_limit_interval = 6  # Time interval in seconds
+rate_limit_interval = 10  # Time interval in seconds
 
 # Function to load file content
 def load_file(file_path):
@@ -64,14 +64,16 @@ if st.button("🔄 Generate Password"):
     if not st.session_state.first_click and current_time - st.session_state.last_clicked < rate_limit_interval:
         st.warning(f"Please wait {rate_limit_interval} seconds before trying again.")
     else:
-        # Update the session state time
+        # Update the session state time and generate the password
         st.session_state.last_clicked = current_time
-        # Generate password
-        password = generate_password(letters_count, symbols_count, numbers_count)
+        st.session_state.generated_password = generate_password(letters_count, symbols_count, numbers_count)
+        
+        # Mark first click as complete
+        st.session_state.first_click = False
 
         # Display the password with copy-to-clipboard
         st.success("🎉 Password generated!")
-        st.code(password)
+        st.code(st.session_state.generated_password)
 
 # Add Spacer
 st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)

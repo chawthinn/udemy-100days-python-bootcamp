@@ -1,6 +1,7 @@
 import string
 import random
 import streamlit as st
+import time
 
 # Create session state variables
 if "last_clicked" not in st.session_state:

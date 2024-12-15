@@ -32,15 +32,11 @@ if st.button("Play Game"):
     # Get the result of the game
     player_choice_result, computer_choice_result, result = rock_paper_scissors_game(player_choice_number, computer_choice_number)
 
-    # Display the choices and the result
+    # Show the choices made
     st.write("You chose:")
-    st.markdown(display_pick(player_choice_number), unsafe_allow_html=True)
-    
+    st.code(player_choice_result,  language=None)  # ASCII art for player's choice
     st.write("Computer chose:")
-    st.markdown(display_pick(computer_choice_number), unsafe_allow_html=True)
-    
-    # Get result from the game logic
-    _, _, result = rock_paper_scissors_game(player_choice_number, computer_choice_number)
+    st.code(computer_choice_result)  # ASCII art for computer's choice
 
     # Show the result
     if result == "You lose!":

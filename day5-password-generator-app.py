@@ -2,7 +2,12 @@ import string
 import random
 import streamlit as st
 
-import streamlit as st
+# Create session state variables
+if "last_clicked" not in st.session_state:
+    st.session_state.last_clicked = time.time()
+
+# Define rate limiting parameters
+rate_limit_interval = 10  # Time interval in seconds
 
 # Function to load file content
 def load_file(file_path):
@@ -47,12 +52,19 @@ numbers_count = st.number_input("How many numbers?", min_value=0, value=3)
 
 # Generate button
 if st.button("🔄 Generate Password"):
-    # Generate password
-    password = generate_password(letters_count, symbols_count, numbers_count)
+    # Check the time of the last button click
+    current_time = time.time()
 
-    # Display the password with copy-to-clipboard
-    st.success("🎉 Password generated! Hover to copy to clipboard.")
-    st.code(password)
+    if current_time - st.session_state.last_clicked < rate_limit_interval:
+        st.warning("Please wait a few seconds before trying again.")
+    else:
+        st.session_state.last_clicked = current_time
+        # Generate password
+        password = generate_password(letters_count, symbols_count, numbers_count)
+
+        # Display the password with copy-to-clipboard
+        st.success("🎉 Password generated! Hover to copy to clipboard.")
+        st.code(password)
 
 # Add Spacer
 st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)

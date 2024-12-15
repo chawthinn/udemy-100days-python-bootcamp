@@ -11,7 +11,7 @@ if "generated_password" not in st.session_state:
 if "first_click" not in st.session_state:
     st.session_state.first_click = True  # Track if it's the first click
 if "countdown" not in st.session_state:
-    st.session_state.countdown = 0  # Store the countdown timer
+    st.session_state.countdown = 0
 
 # Define rate limiting parameters
 rate_limit_interval = 6  # Time interval in seconds
@@ -62,11 +62,21 @@ if st.button("🔄 Generate Password"):
     # Check the time of the last button click
     current_time = time.time()
 
-    # Check if the rate limit interval has passed and if it's not the first click
-    if not st.session_state.first_click and current_time - st.session_state.last_clicked < rate_limit_interval:
+    # If rate limit is still active, show countdown
+    if current_time - st.session_state.last_clicked < rate_limit_interval:
         time_remaining = rate_limit_interval - (current_time - st.session_state.last_clicked)
         st.session_state.countdown = int(time_remaining)  # Update countdown
-        st.warning(f"Please wait {st.session_state.countdown} seconds before trying again.")
+
+        # Create an empty container to update countdown dynamically
+        countdown_placeholder = st.empty()
+
+        # Countdown loop for live updates
+        for i in range(st.session_state.countdown, 0, -1):
+            countdown_placeholder.text(f"Please wait {i} seconds before trying again.")
+            time.sleep(1)  # Delay of 1 second
+            st.experimental_rerun()  # Re-run the script every second to update the countdown
+
+        countdown_placeholder.text("You can now generate a new password!")
     else:
         # Update the session state time and generate the password
         st.session_state.last_clicked = current_time
@@ -78,12 +88,6 @@ if st.button("🔄 Generate Password"):
         # Display the password with copy-to-clipboard
         st.success("🎉 Password generated!")
         st.code(st.session_state.generated_password)
-
-# Display countdown in real-time
-if st.session_state.countdown > 0:
-    for i in range(st.session_state.countdown, 0, -1):
-        st.session_state.countdown = i
-        st.experimental_rerun()  # Rerun the app to update the countdown every second
 
 # Add Spacer
 st.markdown("<div style='height: 50px;'></div>", unsafe_allow_html=True)

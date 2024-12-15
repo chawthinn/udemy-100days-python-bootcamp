@@ -2,8 +2,20 @@ import string
 import random
 import streamlit as st
 
+# Function to load external files
+def load_file(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+        return f.read()
+
+# Load CSS and HTML
+footer_css = load_file("footer.css")
+footer_html = load_file("footer.html")
+
+# Inject CSS and HTML into the Streamlit app
+st.markdown(f"<style>{footer_css}</style>", unsafe_allow_html=True)
+
 # Password generation functions
-def generate_password_v4(letters_count, symbols_count, numbers_count):
+def generate_password(letters_count, symbols_count, numbers_count):
     password_list = []
     password = ""
 
@@ -25,20 +37,23 @@ def generate_password_v4(letters_count, symbols_count, numbers_count):
     return password
 
 # Streamlit App
-st.title("PyPassword Generator")
-st.text("Here you can generate password with your choice of random letters, symbols and numbers.")
+st.title("🔐 PyPassword Generator")
+st.markdown("Generate secure, random passwords with your choice of letters, symbols, and numbers.")
 
 # Inputs
+st.subheader("📝 Select your password criteria:")
 letters_count = st.number_input("How many letters?", min_value=0, value=4)
 symbols_count = st.number_input("How many symbols?", min_value=0, value=2)
 numbers_count = st.number_input("How many numbers?", min_value=0, value=3)
 
 # Generate button
-if st.button("Generate Password"):
+if st.button("🔄 Generate Password"):
     # Generate password
-    password = generate_password_v4(letters_count, symbols_count, numbers_count)
+    password = generate_password(letters_count, symbols_count, numbers_count)
 
     # Display the password with copy-to-clipboard
-    st.write("Your generated password:")
-    st.text_input("Copy your password", value=password, key="password_input", disabled=True)
+    st.success("🎉 Password generated! Hover to copy to clipboard.")
     st.code(password)
+
+# Inject Footer HTML at the end
+st.markdown(footer_html, unsafe_allow_html=True)

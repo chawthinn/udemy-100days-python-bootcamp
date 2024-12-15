@@ -10,8 +10,6 @@ if "generated_password" not in st.session_state:
     st.session_state.generated_password = ""
 if "first_click" not in st.session_state:
     st.session_state.first_click = True  # Track if it's the first click
-if "countdown" not in st.session_state:
-    st.session_state.countdown = 0
 
 # Define rate limiting parameters
 rate_limit_interval = 6  # Time interval in seconds
@@ -74,7 +72,6 @@ if st.button("🔄 Generate Password"):
         for i in range(st.session_state.countdown, 0, -1):
             countdown_placeholder.text(f"Please wait {i} seconds before trying again.")
             time.sleep(1)  # Delay of 1 second
-            st.experimental_rerun()  # Re-run the script every second to update the countdown
 
         countdown_placeholder.text("You can now generate a new password!")
     else:
